@@ -2,7 +2,7 @@ name: 'App/DeployFrontend'
 on:
   workflow_dispatch:  # Manual trigger only
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code 
@@ -27,7 +27,7 @@ jobs:
         with:
           namespace: 'autionify'
           manifests: |
-             frontend/k8s/ns.yaml
+             frontend/ns.yaml
              frontend/deployment.yaml
              frontend/service.yaml
              frontend/ingress.yaml

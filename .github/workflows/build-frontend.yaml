@@ -2,7 +2,7 @@ name: 'App/BuildFrontend'
 on:
   workflow_dispatch:  # Manual trigger only
 jobs:
-    build-and-deploy:
+    build-and-push:
         runs-on: ubuntu-latest
         steps:
         # checkout the repo
