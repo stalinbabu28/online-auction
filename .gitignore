@@ -64,3 +64,34 @@ sdist/
 a.txt
 notes.txt
 # End of .gitignore
+
+# terraform
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Ignore crash logs
+crash.log
+crash.*.log
+
+# Ignore Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore Terraform working directories
+.terraform/
+
+# Ignore plan files
+*.tfplan
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore sensitive variable files
+terraform.tfvars
+*.auto.tfvars
+
+# Ignore lock files
+.terraform.lock.hcl
