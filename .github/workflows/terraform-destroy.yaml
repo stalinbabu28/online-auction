@@ -28,7 +28,7 @@ jobs:
     name: 'Terraform Destroy'
     needs: terraform-plan-destroy
     runs-on: ubuntu-latest
-    environment: production  # Requires manual approval in GitHub Environments
+    environment: dev  # Requires manual approval in GitHub Environments
     steps:
       - name: 'Checkout GitHub Actions'
         uses: actions/checkout@v4
