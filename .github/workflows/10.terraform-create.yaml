@@ -77,3 +77,5 @@ jobs:
       - name: 'Terraform Apply'
         run: terraform apply -auto-approve
         working-directory: ./terraform
+      - name: 'Enable Application Routing'
+        run: az aks approuting enable --resource-group rg-auctionify --name auctionifyaks
