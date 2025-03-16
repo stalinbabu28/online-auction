@@ -25,7 +25,7 @@ jobs:
         id: deploy-aks
         uses: Azure/k8s-deploy@v4
         with:
-          namespace: 'autionify'
+          namespace: 'auctionify'
           manifests: |
              k8s/ns.yaml
              k8s/deployment.yaml
