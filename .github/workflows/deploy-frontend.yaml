@@ -29,7 +29,7 @@ jobs:
           manifests: |
              k8s/ns.yaml
              k8s/deployment.yaml
-             k8s/frontend/service.yaml
-             k8s/frontend/ingress.yaml
+             k8s/service.yaml
+             k8s/ingress.yaml
           images: '${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/frontend:latest'
           pull-images: true
