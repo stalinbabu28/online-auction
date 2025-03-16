@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:  # Manual trigger only
 
-name: Linux_Container_Workflow
+name: Build Frontend
 
 jobs:
     build-and-deploy:
