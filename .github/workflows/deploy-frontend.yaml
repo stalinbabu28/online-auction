@@ -27,9 +27,9 @@ jobs:
         with:
           namespace: 'autionify'
           manifests: |
-             frontend/ns.yaml
-             frontend/deployment.yaml
-             frontend/service.yaml
-             frontend/ingress.yaml
+             k8s/ns.yaml
+             k8s/deployment.yaml
+             k8s/frontend/service.yaml
+             k8s/frontend/ingress.yaml
           images: '${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/frontend:latest'
           pull-images: true
