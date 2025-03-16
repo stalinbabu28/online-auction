@@ -24,7 +24,7 @@ terraform {
     resource_group_name  = "auctionify-terraform-state-rg"
     storage_account_name = "auctionifyterraformstate"
     container_name       = "tfstate"
-    key                 = "terraform.tfstate"
+    key                  = "terraform.tfstate"
   }
 }
 

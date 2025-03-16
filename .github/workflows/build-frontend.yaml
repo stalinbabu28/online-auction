@@ -1,8 +1,6 @@
+name: Build Frontend
 on:
   workflow_dispatch:  # Manual trigger only
-
-name: Build Frontend
-
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
@@ -22,6 +20,6 @@ jobs:
             
         - name: 'Build and push image'
           run: |
-            docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/frontend:${{ github.sha }} .
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/frontend:${{ github.sha }} 
+            docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/frontend:latest .
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/frontend:latest
           working-directory: ./frontend    

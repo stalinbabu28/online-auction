@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker pull auctionify.azurecr.io/frontend:ba01a59e67e7608b960e59d4110c460cc67fba66
+          image: docker pull auctionify.azurecr.io/frontend:latest
           ports:
             - containerPort: 80

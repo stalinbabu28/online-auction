@@ -1,0 +1,34 @@
+name: Deploy Frontend
+on:
+  workflow_dispatch:  # Manual trigger only
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code 
+        uses: actions/checkout@v4
+      - name: Azure login
+        id: login
+        uses: azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Set AKS context
+        id: set-context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: "rg-auctionify"
+          cluster-name: "auctionifyaks"
+
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'autionify'
+          manifests: |
+             frontend/deployment.yaml
+          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/frontend:latest'
+          pull-images: false
