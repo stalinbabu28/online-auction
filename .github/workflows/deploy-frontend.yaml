@@ -22,7 +22,7 @@ jobs:
         id: install-kubectl
         uses: azure/setup-kubectl@v3
       - name: Deploy to AKS
-        id: deploy-aks
+        id: deploy-aks-ns
         uses: Azure/k8s-deploy@v4
         with:
           namespace: 'auctionify'
@@ -30,6 +30,8 @@ jobs:
              k8s/ns.yaml
           images: '${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/frontend:latest'
           pull-images: true
+      - name: Wait for namespace
+        run: sleep 10    
       - name: Deploy to AKS
         id: deploy-aks
         uses: Azure/k8s-deploy@v4
