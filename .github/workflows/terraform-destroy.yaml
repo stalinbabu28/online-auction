@@ -29,7 +29,6 @@ jobs:
         run: terraform plan -destroy 
         working-directory: ./terraform
 
-
   terraform-destroy:
     name: 'Terraform Destroy'
     needs: terraform-plan-destroy
@@ -53,7 +52,27 @@ jobs:
       - name: 'Terraform Init'
         run: terraform init
         working-directory: ./terraform
-        
+
       - name: 'Terraform Destroy'
         run: terraform destroy -auto-approve 
         working-directory: ./terraform
+
+  cleanup-terraform-storage:
+    name: 'Remove Terraform Storage'
+    if: always()  # Ensures this runs even if previous jobs fail
+    runs-on: ubuntu-latest
+    needs: terraform-apply
+
+    steps:
+      - name: 'Azure Login'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Delete Storage Account'
+        run: |
+          az storage account delete --name auctionifyterraformstate --resource-group auctionify-terraform-state-rg --yes --output none
+
+      - name: 'Delete Resource Group'
+        run: |
+          az group delete --name auctionify-terraform-state-rg --yes --no-wait --output none

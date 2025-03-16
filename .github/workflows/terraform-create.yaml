@@ -3,10 +3,40 @@ on:
   workflow_dispatch:  # Manual trigger only
 
 jobs:
+  setup-terraform-storage:
+    name: 'Setup Terraform Storage'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Azure Login'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Create Resource Group'
+        run: |
+          az group create --name auctionify-terraform-state-rg --location eastus --output none
+
+      - name: 'Create Storage Account'
+        run: |
+          az storage account create \
+            --name auctionifyterraformstate \
+            --resource-group auctionify-terraform-state-rg \
+            --location southindia \
+            --sku Standard_LRS \
+            --kind StorageV2 \
+            --output none
+
+      - name: 'Create Blob Container'
+        run: |
+          az storage container create \
+            --name tfstate \
+            --account-name auctionifyterraformstate \
+            --output none
+
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-
     steps:
       - name: 'Checkout GitHub Actions'
         uses: actions/checkout@v4
@@ -29,13 +59,11 @@ jobs:
         run: terraform plan
         working-directory: ./terraform
 
-
   terraform-apply:
     name: 'Terraform Apply'
     needs: terraform-plan
     runs-on: ubuntu-latest
     environment: dev  # Requires manual approval in GitHub Environments
-
     steps:
       - name: 'Checkout GitHub Actions'
         uses: actions/checkout@v4
@@ -53,11 +81,11 @@ jobs:
       - name: 'Terraform Init'
         run: terraform init
         working-directory: ./terraform
-        
+
       - name: 'Terraform Plan'      
         run: terraform plan
         working-directory: ./terraform
 
       - name: 'Terraform Apply'
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve
         working-directory: ./terraform
