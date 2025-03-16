@@ -13,7 +13,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: 'Create Resource Group'
         run: |
-          az group create --name auctionify-terraform-state-rg --location southinia --output none
+          az group create --name auctionify-terraform-state-rg --location southindia --output none
       - name: 'Create Storage Account'
         run: |
           az storage account create \
