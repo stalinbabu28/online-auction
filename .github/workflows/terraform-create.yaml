@@ -26,14 +26,9 @@ jobs:
         working-directory: ./terraform
 
       - name: 'Terraform Plan'
-        run: terraform plan -out=tfplan
+        run: terraform plan
         working-directory: ./terraform
 
-      - name: 'Upload Terraform Plan'
-        uses: actions/upload-artifact@v4
-        with:
-          name: terraform-plan
-          path: ./terraform/tfplan
 
   terraform-apply:
     name: 'Terraform Apply'
@@ -55,11 +50,9 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: 'Download Terraform Plan'
-        uses: actions/download-artifact@v4
-        with:
-          name: terraform-plan
-          path: ./terraform
+      - name: 'Terraform Plan'
+        run: terraform plan
+        working-directory: ./terraform
 
       - name: 'Terraform Apply'
         run: terraform apply -auto-approve tfplan
