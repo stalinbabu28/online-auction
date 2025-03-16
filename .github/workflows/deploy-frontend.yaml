@@ -28,6 +28,18 @@ jobs:
           namespace: 'auctionify'
           manifests: |
              k8s/ns.yaml
+          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/frontend:latest'
+          pull-images: true
+      -bash: |
+        echo "sleep 15"
+        sleep 15
+
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'auctionify'
+          manifests: |
              k8s/deployment.yaml
              k8s/service.yaml
              k8s/ingress.yaml
