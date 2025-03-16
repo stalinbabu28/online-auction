@@ -1,4 +1,4 @@
-name: 'App/DeployFrontend'
+name: 'app/deploy-frontend'
 on:
   workflow_dispatch:  # Manual trigger only
 jobs:
