@@ -1,4 +1,4 @@
-name: 'infra/terraform-destroy'
+name: '40.infra/terraform-destroy'
 on:
   workflow_dispatch:  # Manual trigger only
 
