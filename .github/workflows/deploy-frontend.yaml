@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: 'App/DeployFrontend'
 on:
   workflow_dispatch:  # Manual trigger only
 jobs:
@@ -18,17 +18,18 @@ jobs:
         with:
           resource-group: "rg-auctionify"
           cluster-name: "auctionifyaks"
-
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
-
       - name: Deploy to AKS
         id: deploy-aks
         uses: Azure/k8s-deploy@v4
         with:
           namespace: 'autionify'
           manifests: |
+             frontend/k8s/ns.yaml
              frontend/deployment.yaml
+             frontend/service.yaml
+             frontend/ingress.yaml
           images: '${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/frontend:latest'
-          pull-images: false
+          pull-images: true

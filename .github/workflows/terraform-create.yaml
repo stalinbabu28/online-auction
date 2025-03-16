@@ -1,4 +1,4 @@
-name: 'Terraform Create'
+name: 'Infra/TerraformCreate'
 on:
   workflow_dispatch:  # Manual trigger only
 

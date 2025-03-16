@@ -5,6 +5,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: addon-http-application-routing
   rules:
     - host: auctionify.online
       http:
