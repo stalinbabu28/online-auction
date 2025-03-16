@@ -16,6 +16,8 @@ jobs:
         
         - name: 'Login to Azure Container Registry'
           run: |
+            az login 
+            az account set --subscription "665b9990-181c-4de5-a3cf-99714a3f241e"
             az acr login --name ${{ secrets.REGISTRY_LOGIN_SERVER }}
             
         - name: 'Build and push image'
