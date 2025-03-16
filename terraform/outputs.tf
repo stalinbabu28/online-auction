@@ -12,6 +12,7 @@ output "aks_cluster_name" {
 
 output "aks_cluster_kube_config" {
   value = azurerm_kubernetes_cluster.k8s.kube_config_raw
+  sensitive = true
 }
 output "client_certificate" {
   value     = azurerm_kubernetes_cluster.k8s.kube_config[0].client_certificate
